@@ -1,9 +1,20 @@
 
-# RSS FEED NOTIFYIER
-A work in progress
+# RSS Feed Notifier
 
-## BUILD
-1. make
+## Basic Workflow
+1. User inputs the feeds they want to follow.
+2. The application constantly polls the feed for new updates (feed items).
+3. Updates are presented to the user and disappear once they are marked as "read".
 
-## RUN
+## Required Features
+1. Add and remove a feed
+2. View feed items and mark as read
+
+## Build
+```
+make
+```
+## Run
+```
 ./RSSParser
+```
