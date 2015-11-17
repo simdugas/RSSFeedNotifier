@@ -10,6 +10,12 @@
 1. Add and remove a feed
 2. View feed items and mark as read
 
+## Dependencies
+- cmake
+- tinyxml2
+    - I installed this using brew install tinyxml2 on my Mac
+    - See http://www.grinninglizard.com/tinyxml2/
+      
 ## Build
 ```
 mkdir build
@@ -17,6 +23,7 @@ cd build
 cmake ..
 make
 ```
+
 ## Run
 ```
 ./RSSParser ../test.xml
