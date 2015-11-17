@@ -1,7 +1,7 @@
 
 #include <iostream>
 
-#include "tinyxml2.h"
+#include <tinyxml2.h>
 
 using namespace tinyxml2;
 using namespace std;
@@ -17,40 +17,41 @@ using namespace std;
     </rss>
 */
 
-/** Representation of a channel item.
-*/
+/**
+ * Representation of a channel item.
+ */
 class RSSFeedItem
 {
 private:
-  const char *title;
-  const char *link;
-  const char *description;
-  const char *pubDate;
-  const char *guid;
-  const char *date;
+    const char *title;
+    const char *link;
+    const char *description;
+    const char *pubDate;
+    const char *guid;
+    const char *date;
 
 public:
-  RSSFeedItem(
-    const char *title,
-    const char *link,
-    const char *description,
-    const char *pubDate,
-    const char *guid,
-    const char *date
-  ):
-    title( title ),
-    link( link ),
-    description( description ),
-    pubDate( pubDate ),
-    guid( guid ),
-    date( date )
+    RSSFeedItem(
+            const char *title,
+            const char *link,
+            const char *description,
+            const char *pubDate,
+            const char *guid,
+            const char *date
+    ):
+            title( title ),
+            link( link ),
+            description( description ),
+            pubDate( pubDate ),
+            guid( guid ),
+            date( date )
     {}
 
-  void
-  print()
-  {
-    cout << title << endl;
-  }
+    void
+    print()
+    {
+        cout << title << endl;
+    }
 };
 
 /** Get the text of the tag name for an item.
@@ -68,15 +69,15 @@ val( XMLElement *item, const char *tag )
 RSSFeedItem *
 parseItem( XMLElement *item )
 {
-  RSSFeedItem *fItem = new RSSFeedItem(
-    val( item, "title" ),
-    val( item, "link" ),
-    val( item, "description" ),
-    val( item, "pubDate" ),
-    val( item, "guid" ),
-    NULL
-  );
-  return( fItem );
+    RSSFeedItem *fItem = new RSSFeedItem(
+            val( item, "title" ),
+            val( item, "link" ),
+            val( item, "description" ),
+            val( item, "pubDate" ),
+            val( item, "guid" ),
+            NULL
+    );
+    return( fItem );
 }
 
 /** A Sample program to parse the items.
@@ -84,18 +85,21 @@ parseItem( XMLElement *item )
 int
 main()
 {
-  XMLDocument doc;
-  doc.LoadFile( "test.xml" );
+    XMLDocument doc;
+    doc.LoadFile( "test.xml" );
 
-  XMLElement *root = doc.FirstChildElement( "rss" );
-  XMLElement *channel = root->FirstChildElement( "channel" );
-  XMLElement *item = channel->FirstChildElement( "item" );
+    XMLElement *root = doc.FirstChildElement( "rss" );
+    XMLElement *channel = root->FirstChildElement( "channel" );
+    XMLElement *item = channel->FirstChildElement( "item" );
 
-  while( item )
-  {
-    RSSFeedItem *fItem = parseItem( item );
-    fItem->print();
-    item = item->NextSiblingElement();
-  }
+    while( item )
+    {
+        RSSFeedItem *fItem = parseItem( item );
+        fItem->print();
+        item = item->NextSiblingElement();
+    }
+
+    return( 0 );
+
 }
 
