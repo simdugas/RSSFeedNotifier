@@ -83,20 +83,33 @@ parseItem( XMLElement *item )
 /** A Sample program to parse the items.
 */
 int
-main()
+main( int argc, char *argv[] )
 {
-    XMLDocument doc;
-    doc.LoadFile( "test.xml" );
+    if( 2 == argc ) {
 
-    XMLElement *root = doc.FirstChildElement( "rss" );
-    XMLElement *channel = root->FirstChildElement( "channel" );
-    XMLElement *item = channel->FirstChildElement( "item" );
+        XMLDocument doc;
 
-    while( item )
+        if( XML_NO_ERROR == doc.LoadFile( argv[1] ) )
+        {
+            XMLElement *root = doc.FirstChildElement("rss");
+            XMLElement *channel = root->FirstChildElement("channel");
+            XMLElement *item = channel->FirstChildElement("item");
+
+            while (item) {
+                RSSFeedItem *fItem = parseItem(item);
+                fItem->print();
+                item = item->NextSiblingElement();
+            }
+        }
+        else
+        {
+            cout << "Could not load file " << argv[1] << endl;
+        }
+
+    }
+    else
     {
-        RSSFeedItem *fItem = parseItem( item );
-        fItem->print();
-        item = item->NextSiblingElement();
+        cout << "Usage: ./RSSParser <rss_xml_file>" << endl;
     }
 
     return( 0 );
